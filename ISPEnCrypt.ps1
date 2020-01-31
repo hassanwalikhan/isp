@@ -10,7 +10,7 @@ function Encrypt-File($String, $Passphrase)
     $pass = [Text.Encoding]::UTF8.GetBytes($Passphrase)
     $salt = [Text.Encoding]::UTF8.GetBytes($salt)
 
-    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 5).GetBytes(32) #256/8
+    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 15).GetBytes(32) #512/20
     $r.IV = (new-Object Security.Cryptography.SHA1Managed).ComputeHash( [Text.Encoding]::UTF8.GetBytes($init) )[0..15]
    
     $c = $r.CreateEncryptor()
