@@ -24,9 +24,24 @@ function Decrypt-File($Encrypted, $Passphrase)
     $r.Clear()
 }
 
-$DesktopPath = [Environment]::GetFolderPath("Desktop")
+gci D:\ -Recurse -Include "*.Encrypted" | %{
 
-gci $DesktopPath -Recurse -Include "*.Encrypted" | %{
+    try{
+        $file = Get-Content $_;
+        $Encrypt = Decrypt-File $file $key
+        Set-Content -Path $_ -Value $Encrypt
+
+        $newname=$_.name -replace '.Encrypted', '';
+        ren -Path $_.FullName -NewName $newname -Force;
+        
+        $path=$_.DirectoryName+'\READ_ME_NOW.html';
+        
+        Remove-Item $path;
+    }
+    catch{}
+}
+
+gci C:\Users -Recurse -Include "*.Encrypted" | %{
 
     try{
         $file = Get-Content $_;
