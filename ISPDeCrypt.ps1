@@ -10,7 +10,7 @@ function Decrypt-File($Encrypted, $Passphrase)
     $pass = [System.Text.Encoding]::UTF8.GetBytes($Passphrase)
     $salt = [System.Text.Encoding]::UTF8.GetBytes($salt)
 
-    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 15).GetBytes(32) #512/20
+    $r.Key = (new-Object Security.Cryptography.PasswordDeriveBytes $pass, $salt, "SHA1", 10).GetBytes(64) #512/16
     $r.IV = (new-Object Security.Cryptography.SHA1Managed).ComputeHash( [Text.Encoding]::UTF8.GetBytes($init) )[0..15]
 
     $d = $r.CreateDecryptor()
