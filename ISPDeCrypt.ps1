@@ -24,7 +24,7 @@ function Decrypt-File($Encrypted, $Passphrase)
     $r.Clear()
 }
 
-gci D:\ -Recurse -Include "*.Encrypted" | %{
+gci C:\Users -Recurse -Include "*.Encrypted" | %{
 
     try{
         $file = Get-Content $_;
@@ -41,7 +41,7 @@ gci D:\ -Recurse -Include "*.Encrypted" | %{
     catch{}
 }
 
-gci C:\Users -Recurse -Include "*.Encrypted" | %{
+gci D:\ -Recurse -Include "*.Encrypted" | %{
 
     try{
         $file = Get-Content $_;
